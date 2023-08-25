@@ -6,7 +6,7 @@ pipeline {
   stages {
     stage ('Initialize') {
       steps {
-        sh '''
+        bat '''
                     echo "PATH = ${PATH}"
                     echo "M2_HOME = ${M2_HOME}"
             ''' 
@@ -15,15 +15,15 @@ pipeline {
     
     stage ('Check-Git-Secrets') {
       steps {
-        sh 'rm trufflehog || true'
-        sh 'docker run gesellix/trufflehog --json https://github.com/cehkunal/webapp.git > trufflehog'
-        sh 'cat trufflehog'
+        bat 'rm trufflehog || true'
+        bat 'docker run gesellix/trufflehog --json https://github.com/cehkunal/webapp.git > trufflehog'
+        bat 'cat trufflehog'
       }
     }
     
     stage ('Build') {
       steps {
-      sh 'mvn clean package'
+      bat 'mvn clean package'
        }
     }
     
