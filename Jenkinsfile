@@ -15,7 +15,7 @@ pipeline {
     
     stage ('Trufflehog') {
       steps {
-        bat 'trufflehog git https://github.com/bansarid/webapp --only-verified'
+        bat 'C:/Users/bansarid/Documents/TruffleHog/trufflehog git https://github.com/bansarid/webapp --only-verified'
       }
     }
     
