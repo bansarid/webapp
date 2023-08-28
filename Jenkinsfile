@@ -1,5 +1,5 @@
 pipeline {
-  agent any 
+  agent { label 'BansariNode' }
   tools {
     maven 'M3'
   }
@@ -13,11 +13,9 @@ pipeline {
       }
     }
     
-    stage ('Check-Git-Secrets') {
+    stage ('Trufflehog') {
       steps {
-        bat 'rm trufflehog || true'
-        bat 'docker run gesellix/trufflehog --json https://github.com/bansarid/webapp.git > trufflehog'
-        bat 'cat trufflehog'
+        bat 'trufflehog git https://github.com/bansarid/webapp --only-verified'
       }
     }
     
